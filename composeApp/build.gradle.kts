@@ -13,6 +13,7 @@ plugins {
 }
 
 kotlin {
+    jvm("desktop")                  // Desktop JVM target
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
@@ -30,8 +31,6 @@ kotlin {
             isStatic = true
         }
     }
-    
-    jvm("desktop")
 
     room {
         schemaDirectory("$projectDir/schemas")
@@ -43,7 +42,6 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
-
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
             implementation(libs.ktor.client.okhttp)
@@ -81,7 +79,7 @@ kotlin {
         }
 
         dependencies {
-            ksp(libs.androidx.room.compiler)
+//            ksp(libs.androidx.room.compiler)
         }
     }
 }
@@ -115,6 +113,13 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
+    add("kspAndroid", libs.androidx.room.compiler)
+//    add("kspJvm", libs.androidx.room.compiler)
+//    add("kspCommonMainMetadata", project(":test-processor"))
+//    add("kspJvm", project(":test-processor"))
+//    add("kspJvmTest", project(":test-processor")) // Not doing anything because there's no test source set for JVM
+//    // There is no processing for the Linux x64 main source set, because kspLinuxX64 isn't specified
+//    add("kspLinuxX64Test", project(":test-processor"))
 }
 
 compose.desktop {

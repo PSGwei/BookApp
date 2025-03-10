@@ -27,6 +27,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
@@ -59,9 +60,12 @@ fun BookListItem(
                 .padding(16.dp)
                 .fillMaxWidth()
                 .height(IntrinsicSize.Min), // provide a minimum height to fit all items in Row
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
-                modifier = Modifier.height(100.dp)
+                modifier = Modifier.height(100.dp),
+                contentAlignment = Alignment.Center
             ) {
                 var imageLoadResult by remember {
                     mutableStateOf<Result<Painter>?>(null)
@@ -101,15 +105,15 @@ fun BookListItem(
                     .fillMaxHeight()
                     //if single element inside current Row set as weight(1f), this element can occupied for the remaining space
                     .weight(1f),
-//                verticalArrangement = Arrangement.Center
-            ){
+                verticalArrangement = Arrangement.Center
+            ) {
                 Text(
                     text = book.title,
                     style = MaterialTheme.typography.titleMedium,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 2
                 )
-                book.authors.firstOrNull()?.let {authorName->
+                book.authors.firstOrNull()?.let { authorName ->
                     Text(
                         text = authorName,
                         style = MaterialTheme.typography.bodyLarge,
@@ -117,12 +121,14 @@ fun BookListItem(
                         overflow = TextOverflow.Ellipsis
                     )
                 }
-                book.averageRating?.let { rating ->
-                    Text(
-                        text = "${round(rating * 10)/10}",
-                        style = MaterialTheme.typography.bodyLarge,
-                    )
-                    Icon(Icons.Default.Star, contentDescription = null ,tint = SandYellow)
+                Row {
+                    book.averageRating?.let { rating ->
+                        Text(
+                            text = "${round(rating * 10) / 10}",
+                            style = MaterialTheme.typography.bodyLarge,
+                        )
+                    }
+                    Icon(Icons.Default.Star, contentDescription = null, tint = SandYellow)
                 }
             }
             Icon(

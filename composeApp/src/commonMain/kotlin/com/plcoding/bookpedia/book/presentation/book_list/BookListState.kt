@@ -11,3 +11,19 @@ data class BookListState(
     val selectedTabIndex:Int = 0,
     val errorMessage:UiText? = null
 )
+//
+//private val books = (1..100).map {
+//    Book(
+//        id = it.toString(),
+//        title = "Book $it",
+//        imageUrl = "https://example.com",
+//        authors = listOf("abu"),
+//        description = "Book description",
+//        languages = emptyList(),
+//        firstPublishYear = null,
+//        averageRating = 3.844,
+//        ratingCount = null,
+//        numPages = null,
+//        numEditions = 1
+//    )
+//}

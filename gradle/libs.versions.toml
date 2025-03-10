@@ -1,5 +1,5 @@
 [versions]
-agp = "8.8.0"
+agp = "8.8.2"
 android-compileSdk = "35"
 android-minSdk = "24"
 android-targetSdk = "35"
@@ -13,16 +13,16 @@ androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
 compose-plugin = "1.7.0"
 junit = "4.13.2"
-kotlin = "2.0.21"
+kotlin = "2.1.10"
 kotlinx-coroutines = "1.9.0"
 navigationCompose = "2.8.0-alpha10"
 kotlinSerialization = "1.7.3"
 koin = "4.0.0"
 ktor = "3.0.0"
 coil3 = "3.0.0-rc02"
-ksp = "2.0.20-1.0.24"
-sqlite = "2.5.0-alpha11"
-room = "2.7.0-alpha11"
+ksp = "2.1.10-1.0.31"
+sqlite = "2.5.0-rc01"
+room = "2.7.0-rc01"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -75,6 +75,7 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }
+
 
 [bundles]
 ktor = [
