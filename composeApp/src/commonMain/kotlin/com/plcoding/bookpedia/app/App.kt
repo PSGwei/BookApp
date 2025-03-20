@@ -17,6 +17,9 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.plcoding.bookpedia.book.presentation.SelectedBookViewModel
+import com.plcoding.bookpedia.book.presentation.book_detail.BookDetailAction
+import com.plcoding.bookpedia.book.presentation.book_detail.BookDetailScreenRoot
+import com.plcoding.bookpedia.book.presentation.book_detail.BookDetailViewModel
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import com.plcoding.bookpedia.book.presentation.book_list.BookListScreenRoot
@@ -55,12 +58,20 @@ fun App() {
 //                    val args = entry.toRoute<Routes.BookDetail>()
                     val selectedBookViewModel = entry.sharedKoinViewModel<SelectedBookViewModel>(navController)
                     val selectedBook by selectedBookViewModel.selectedBook.collectAsStateWithLifecycle()
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ){
-                        Text("Book information $selectedBook")
+                    val viewModel = koinViewModel<BookDetailViewModel>()
+
+                    LaunchedEffect(selectedBook){
+                        selectedBook?.let {
+                            viewModel.onAction(BookDetailAction.OnSelectedBookChange(selectedBook!!))
+                        }
                     }
+
+                    BookDetailScreenRoot(
+                        viewModel = viewModel,
+                        onBackClick = {
+                            navController.navigateUp()
+                        }
+                    )
                 }
             }
         }

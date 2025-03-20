@@ -28,8 +28,8 @@ object HttpClientFactory {
                 )
             }
             install(HttpTimeout){
-                socketTimeoutMillis = 20_00L
-                requestTimeoutMillis = 20_00L
+                socketTimeoutMillis = 200_00L
+                requestTimeoutMillis = 200_00L
             }
             // Logs all HTTP activity
             install(Logging){

@@ -13,10 +13,12 @@ class DefaultBookRepository(
 ) : BookRepository{
     // map the data model to domain model
     override suspend fun searchBooks(query: String) : Result<List<Book>,DataError.Remote>{
-        return remoteBookDataSource.searchBooks(query).map {dto->
-            dto.result.map {
-                it.toBook()
+        return remoteBookDataSource
+            .searchBooks(query)
+            .map {dto->
+                dto.result.map {
+                    it.toBook()
+                }
             }
-        }
     }
 }

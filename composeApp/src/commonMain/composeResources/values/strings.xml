@@ -3,6 +3,11 @@
     <string name="search_hint">Search...</string>
     <string name="search_results">Search Results</string>
     <string name="favourites">Favourites</string>
+    <string name="rating">Rating</string>
+    <string name="pages">Pages</string>
+    <string name="languages">Languages</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="description_unavailable">There is no description for this book</string>
     <string name="no_search_result">Oops, there aren't any books for your search</string>
     <string name="no_favourite_books">You haven't saved any books yet</string>
     <string name="error_disk_full">Opps, it seems like your disk is full.</string>

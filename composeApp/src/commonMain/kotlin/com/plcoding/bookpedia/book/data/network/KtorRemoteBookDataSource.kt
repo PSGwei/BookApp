@@ -18,7 +18,7 @@ class KtorRemoteBookDataSource(
         query: String,
         resultLimit: Int?
     ): Result<SearchResponseDto, DataError.Remote> {
-        return safeCall {
+        return safeCall<SearchResponseDto> {
             httpClient.get(
                 urlString = "$BASE_URL/search.json"
             ) {
