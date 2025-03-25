@@ -147,7 +147,7 @@ private fun BookDetailScreen(
                                     modifier = Modifier.padding(2.dp)
                                 ) {
                                     Text(
-                                        text = language,
+                                        text = language.uppercase(),
                                         style = MaterialTheme.typography.bodyMedium
                                     )
                                 }

@@ -12,6 +12,7 @@ sealed interface Result<out D, out E: Error> {
 //E: The type of the error (the error in Result.Error). It's constrained to be a subclass of Error (i.e., it must be some kind of error type).
 //R: The new type you want to map the data to. It represents the result after transformation
 //map: (T) -> R: defines how to transform the value inside Result.Success from type T to type R
+//this: refers to the Result<T, E> object
 //Result.Success(map(data)):  If the result is a success (Result.Success), it transforms the data inside the success using the provided map function
 inline fun <T, E: Error, R> Result<T, E>.map(map: (T) -> R): Result<R, E> {
     return when(this) {
