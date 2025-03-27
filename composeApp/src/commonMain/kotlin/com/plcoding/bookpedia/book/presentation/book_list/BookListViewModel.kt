@@ -32,6 +32,10 @@ class BookListViewModel(
             if (cachedBooks.isEmpty()) {
                 observeSearchQuery()
             }
+            // when we navigate to details screen, this is still observing, because this run in its own viewmodescope,
+            // if we come back to list screen after 5s, this will add another new observer
+            // that's why we need to cancel the job
+            observeFavoriteBooks()
         }
         // convert a cold flow into a state flow that can be observed in the ViewModel
         // SharingStarted is an enum that controls how the flow behaves when it's being collected by consumers.
@@ -44,6 +48,7 @@ class BookListViewModel(
 
     private val cachedBooks: List<Book> = emptyList()
     private var searchJob: Job? = null
+    private var observeFavoriteBookJob: Job? = null
 
     fun onAction(action: BookListAction) {
         when (action) {
@@ -63,6 +68,20 @@ class BookListViewModel(
                 }
             }
         }
+    }
+
+    private fun observeFavoriteBooks() {
+        observeFavoriteBookJob?.cancel()
+        observeFavoriteBookJob = bookRepository
+            .getFavoritesBooks()
+            .onEach { favoriteBooks ->
+                _state.update {
+                    it.copy(
+                        favouriteBooks = favoriteBooks
+                    )
+                }
+            }
+            .launchIn(viewModelScope)
     }
 
     @OptIn(FlowPreview::class)
